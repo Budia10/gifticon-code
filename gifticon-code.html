@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기프티콘 코드</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .input-field { padding: 10px; margin: 10px; font-size: 16px; }
+        .button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .hidden-code { display: none; margin-top: 20px; font-size: 18px; color: green; }
+        .loading { display: none; font-size: 16px; color: red; }
+    </style>
+</head>
+<body>
+
+    <h2>기프티콘 코드 입력</h2>
+    <input type="password" id="password" class="input-field" placeholder="비밀번호">
+    <button onclick="checkPassword()" class="button">입력</button>
+    <p id="loading" class="loading">비밀번호가 틀렸습니다. 5초 후에 다시 시도하세요...</p>
+    <div id="code" class="hidden-code">기프티콘 코드: ABCD-1234-EFGH</div>
+
+    <script>
+        let canAttempt = true;
+        const correctPassword = "1234";
+        
+        function checkPassword() {
+            if (!canAttempt) return;
+
+            const enteredPassword = document.getElementById("password").value;
+            const loading = document.getElementById("loading");
+            const code = document.getElementById("code");
+
+            if (enteredPassword === correctPassword) {
+                code.style.display = "block";
+                loading.style.display = "none";
+            } else {
+                loading.style.display = "block";
+                canAttempt = false;
+                setTimeout(() => {
+                    canAttempt = true;
+                    loading.style.display = "none";
+                }, 5000);
+            }
+        }
+    </script>
+
+</body>
+</html>
